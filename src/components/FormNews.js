@@ -1,18 +1,32 @@
 import React from 'react'
+import useSelect  from "../hooks/useSelect";
+import PropTypes from 'prop-types'
 
-const FormNews = () => {
+
+const FormNews = ({setCategory}) => {
+
+  const OPTIONS =[
+    {value:'general', label:'General'},
+    {value:'business', label:'Business'},
+    {value:'entertainment', label:'Entertainment'},
+    {value:'health', label:'Health'},
+    {value:'science', label:'Science'},
+    {value:'sports', label:'Sports'},
+    {value:'technology', label:'Technology'}
+  ]
+
+  const [category, SelectNews] = useSelect('general',OPTIONS);
+
+  const searchNews = (e) =>{
+    e.preventDefault();
+    setCategory(category)
+  };
+
     return ( 
-        <form action="" className="flex justify-center items-center flex-col md:flex-row">
+        <form onSubmit={searchNews} className="flex justify-center items-center flex-col md:flex-row">
           <div className="w-2/3 md:w-1/3 md:p-4 mb-6 md:mb-0">
             <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-blue-500 text-blue-800 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-xl"
-                id="grid-state"
-              >
-                <option>New Mexico</option>
-                <option>Missouri</option>
-                <option>Texas</option>
-              </select>
+              <SelectNews/>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
                   className="fill-current h-4 w-4"
@@ -32,6 +46,10 @@ const FormNews = () => {
             {/* </div> */}
         </form>
      );
+}
+
+FormNews.propTypes ={
+  setCategory : PropTypes.func.isRequired
 }
  
 export default FormNews;
