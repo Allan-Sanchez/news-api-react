@@ -9,7 +9,8 @@ function App() {
 
   useEffect(() => {
     const getData = async () =>{
-      const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=ca5e7b29534b44cfb71f497d21d15706`;
+      const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+      const url = `${proxyUrl}https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=ca5e7b29534b44cfb71f497d21d15706`;
 
       const response = await fetch(url);
       const news =await response.json();
